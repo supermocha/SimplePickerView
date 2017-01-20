@@ -13,10 +13,15 @@ CGFloat const toolbarHeight = 35.0;
 
 @interface SimplePickerView () <UIPickerViewDelegate, UIPickerViewDataSource>
 {
+    NSArray *items;
+    UIScrollView *baseScrollView;
+    
     UIPickerView *ycPickerView;
     UIButton *doneButton;
     UIButton *cancelButton;
     UIToolbar *toolbar;
+    
+    BOOL isHidden;
 }
 @end
 
@@ -30,7 +35,7 @@ CGFloat const toolbarHeight = 35.0;
     
     if (self) {
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, pickerViewHeight + toolbarHeight);
-        self.isHidden = true;
+        isHidden = true;
         [self setPickerView];
     }
     
@@ -103,7 +108,7 @@ CGFloat const toolbarHeight = 35.0;
     }
     
     CGFloat newHeight = SCREEN_HEIGHT + CGRectGetHeight(self.frame);
-    self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, newHeight);
+    baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, newHeight);
     
     CGRect newContainer = self.frame;
     newContainer.origin.y = CGRectGetMinY(self.frame) - CGRectGetHeight(self.frame);
@@ -116,13 +121,13 @@ CGFloat const toolbarHeight = 35.0;
                      }
                      completion:nil];
     
-    self.isHidden = false;
+    isHidden = false;
 }
 
 - (void)hidePickerView
 {
     CGFloat newHeight = SCREEN_HEIGHT - CGRectGetHeight(self.frame);
-    self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, newHeight);
+    baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, newHeight);
     
     CGRect newContainer = self.frame;
     newContainer.origin.y = CGRectGetMinY(self.frame) + CGRectGetHeight(self.frame);
@@ -135,10 +140,19 @@ CGFloat const toolbarHeight = 35.0;
                      }
                      completion:nil];
     
-    self.isHidden = true;
+    isHidden = true;
 }
 
 #pragma mark - Setter
+- (void)setItems:(NSArray *)array
+{
+    items = array;
+}
+
+- (void)setBaseScrollView:(UIScrollView *)scrollView
+{
+    baseScrollView = scrollView;
+}
 
 - (void)setPickerViewBackgroungColor:(UIColor *)color
 {
@@ -167,7 +181,7 @@ CGFloat const toolbarHeight = 35.0;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *title = [self.items objectAtIndex:row];
+    NSString *title = [items objectAtIndex:row];
     
     return title;
 }
@@ -181,7 +195,7 @@ CGFloat const toolbarHeight = 35.0;
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return self.items.count;
+    return items.count;
 }
 
 @end
