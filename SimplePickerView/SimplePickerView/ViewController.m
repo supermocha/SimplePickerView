@@ -57,6 +57,8 @@ static NSString *const cellIdentifier = @"Cell";
 
 - (void)setpickerView
 {
+    // !pickerView 這個判斷式雖然可以成立，但感覺比較像是用在布林值的判斷上
+    // 直接用 pickerView == nil 這個判斷式會比較直覺一點
     if (!pickerView) {
         pickerView = [[SimplePickerView alloc] init];
         pickerView.baseScrollView = self.tableView;
@@ -95,6 +97,8 @@ static NSString *const cellIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 可以加個deselect比較好看，不然cell會一直呈現反灰狀態
+    
     if ([openingPickerViewIndexSet containsIndex:indexPath.row]) {
         [openingPickerViewIndexSet removeAllIndexes];
         [pickerView hidePickerView];
