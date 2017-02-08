@@ -21,10 +21,10 @@
 
 @interface SimplePickerView : UIView
 
-@property (nonatomic, strong) NSArray *items;
-@property (nonatomic, strong) UIScrollView *baseScrollView;
-@property (nonatomic, assign) BOOL isHidden;
 @property (nonatomic, weak) id<SimplePickerViewDelegate> delegate;
+
+- (void)setItems:(NSArray *)array;
+- (void)setBaseScrollView:(UIScrollView *)scrollView;
 
 - (NSInteger)selectedRowInComponent;
 
