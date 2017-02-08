@@ -22,3 +22,18 @@
 }
 
 @end
+
+@implementation UITableView (Cell)
+
+- (Cell *)dequeueReusableCellWithId:(NSString *)cellId
+{
+    Cell *cell = [self dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil) {
+        cell = [[NSBundle mainBundle] loadNibNamed:cellId owner:nil options:nil].firstObject;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    return cell;
+}
+
+@end

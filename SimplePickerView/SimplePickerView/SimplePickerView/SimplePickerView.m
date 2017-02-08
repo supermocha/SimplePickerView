@@ -144,6 +144,7 @@ CGFloat const toolbarHeight = 35.0;
 }
 
 #pragma mark - Setter
+
 - (void)setItems:(NSArray *)array
 {
     items = array;

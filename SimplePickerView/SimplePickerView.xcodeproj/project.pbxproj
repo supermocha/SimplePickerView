@@ -344,6 +344,7 @@
 				917250DB1E28DBEB001C3BCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

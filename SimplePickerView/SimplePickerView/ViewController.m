@@ -52,25 +52,16 @@ static NSString *const cellIdentifier = @"Cell";
 - (void)initLayout
 {
     [self setpickerView];
-    [self registerNibForCellReuseIdentifier:cellIdentifier];
 }
 
 - (void)setpickerView
 {
-    // !pickerView 這個判斷式雖然可以成立，但感覺比較像是用在布林值的判斷上
-    // 直接用 pickerView == nil 這個判斷式會比較直覺一點
     if (pickerView == nil) {
         pickerView = [[SimplePickerView alloc] init];
         [pickerView setBaseScrollView:self.tableView];
         pickerView.delegate = self;
         [self.view addSubview:pickerView];
     }
-}
-
-- (void)registerNibForCellReuseIdentifier:(NSString *)identifier
-{
-    UINib *cellNib = [UINib nibWithNibName:identifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:identifier];
 }
 
 #pragma mark - pickerViewDelegate
@@ -97,9 +88,6 @@ static NSString *const cellIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 可以加個deselect比較好看，不然cell會一直呈現反灰狀態
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     if ([openingPickerViewIndexSet containsIndex:indexPath.row]) {
         [openingPickerViewIndexSet removeAllIndexes];
         [pickerView hidePickerView];
@@ -125,10 +113,7 @@ static NSString *const cellIdentifier = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Cell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[Cell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    Cell *cell = [tableView dequeueReusableCellWithId:cellIdentifier];
     
     NSString *title = [[pickerViewItems objectAtIndex:indexPath.row] objectAtIndex:pickerView.selectedRowInComponent];
     cell.titleLabel.text = title;

@@ -13,3 +13,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
+
+@interface UITableView (Cell)
+
+// return the cell with the specified ID. It takes care of the dequeue if necessary
+- (Cell *)dequeueReusableCellWithId:(NSString *)cellId;
+
+@end
