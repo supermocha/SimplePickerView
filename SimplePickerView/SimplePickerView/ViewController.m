@@ -57,8 +57,7 @@ static NSString *const cellIdentifier = @"Cell";
 - (void)setpickerView
 {
     if (pickerView == nil) {
-        pickerView = [[SimplePickerView alloc] init];
-        [pickerView setBaseScrollView:self.tableView];
+        pickerView = [[SimplePickerView alloc] initWithBaseScrollView:self.tableView];
         pickerView.delegate = self;
         [self.view addSubview:pickerView];
     }
@@ -98,7 +97,7 @@ static NSString *const cellIdentifier = @"Cell";
         
         pickerView.tag = indexPath.row;
         [pickerView setItems:[pickerViewItems objectAtIndex:indexPath.row]];
-        [pickerView showPickerView:[[selectedRowDic objectForKey:@(indexPath.row)] integerValue]];
+        [pickerView showPickerViewAtIndexPath:[[selectedRowDic objectForKey:@(indexPath.row)] integerValue]];
     }
     
     NSLog(@"%lu", (unsigned long)openingPickerViewIndexSet.lastIndex);

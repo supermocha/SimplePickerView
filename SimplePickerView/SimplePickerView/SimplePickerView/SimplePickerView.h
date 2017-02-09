@@ -23,16 +23,16 @@
 
 @property (nonatomic, weak) id<SimplePickerViewDelegate> delegate;
 
+- (instancetype)initWithBaseScrollView:(UIScrollView *)scrollView;
 - (void)setItems:(NSArray *)array;
-- (void)setBaseScrollView:(UIScrollView *)scrollView;
-
-- (NSInteger)selectedRowInComponent;
 
 - (void)setPickerViewBackgroungColor:(UIColor *)color;
 - (void)setToolBarBackgroungColor:(UIColor *)color;
 - (void)setButtonColor:(UIColor *)color;
 
-- (void)showPickerView:(NSInteger)selectRow;
+- (void)showPickerViewAtIndexPath:(NSInteger)selectRow;
 - (void)hidePickerView;
+
+- (NSInteger)selectedRowInComponent;
 
 @end

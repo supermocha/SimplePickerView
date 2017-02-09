@@ -29,12 +29,13 @@ CGFloat const toolbarHeight = 35.0;
 
 #pragma mark - Init
 
-- (instancetype)init
+- (instancetype)initWithBaseScrollView:(UIScrollView *)scrollView
 {
     self = [super init];
     
     if (self) {
         self.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, pickerViewHeight + toolbarHeight);
+        baseScrollView = scrollView;
         isHidden = true;
         [self setPickerView];
     }
@@ -98,7 +99,7 @@ CGFloat const toolbarHeight = 35.0;
 
 #pragma mark - Public
 
-- (void)showPickerView:(NSInteger)selectedRow
+- (void)showPickerViewAtIndexPath:(NSInteger)selectedRow
 {
     [ycPickerView reloadAllComponents];
     [ycPickerView selectRow:selectedRow inComponent:0 animated:false];
@@ -148,11 +149,6 @@ CGFloat const toolbarHeight = 35.0;
 - (void)setItems:(NSArray *)array
 {
     items = array;
-}
-
-- (void)setBaseScrollView:(UIScrollView *)scrollView
-{
-    baseScrollView = scrollView;
 }
 
 - (void)setPickerViewBackgroungColor:(UIColor *)color
